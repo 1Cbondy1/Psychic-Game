@@ -1,22 +1,64 @@
-<!--Responsive-Portfolio HTML-->
+<!--Psychic-Game HTML-->
 <!DOCTYPE html>
 <html lang="en-us">
 
 <head>
     <title>Psychic Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
 
-    <h1>Drink Selection!</h1>
-    <hr>
+    <h1>Psychic Game!</h1>
+    <div>Guess which letter I'm thinking of:</div>
+    <div id="wins-text"></div>
+    <div id="losses-text"></div>
+    <div id="guess-left-text"></div>
+    <div id="guess-so-far-text"></div>
+
 
     <script type = "text/javascript">
+
+    var winsText = document.getElementById("wins-text");
+    var lossesText = document.getElementById("losses-text");
+    var guessLeftText = document.getElementById("guess-left-text");
+    var guessSoFarText = document.getElementById("guess-so-far-text");
     
-    
-    
+    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+    var wins = 0;
+    var losses = 0;
+    var guessLeft = 10;
+    var guessSoFar = 0;
+
+    document.onkeyup = function(event) {
+
+        var userGuess = event.key;
+        var compGuess = letters[Math.floor(Math.random() * letters.length)];
+
+        if (guessLeft > 0) {
+            if (userGuess === compGuess) {
+                wins++;
+                guessSoFar++;
+                guessLeft = 10;
+                alert("You win!!");
+            }
+            else {
+                guessSoFar++;
+                guessLeft = guessLeft - 1;
+            }
+        }
+        else {
+            losses++;
+            guessLeft = 10;
+        }
+
+        winsText.textContent = "Wins: " + wins;
+        lossesText.textContent = "Losses: " + losses;
+        guessLeftText.textContent = "Guesses left: " + guessLeft;
+        guessSoFarText.textContent = "Your guesses so far: " + guessSoFar;
+    }
     </script>
                     
 </body>
